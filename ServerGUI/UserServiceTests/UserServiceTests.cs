@@ -34,7 +34,7 @@ namespace UserService.Tests
         [Test]
         public void NewUserTest()
         {
-            Assert.True(service.NewUser("Jenő", "123", "alma", DateTime.Now));
+            Assert.True(service.NewUser("Jenő", "123", "alma"));
         }
     }
 }

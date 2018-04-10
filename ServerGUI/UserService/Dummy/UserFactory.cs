@@ -48,6 +48,7 @@ namespace UserService.Dummy
             };
             Table.Columns.Add(dateCol);
         }
+        
         private  DataColumn StringColumn(string name, int length, bool isNullable)
         {
             return new DataColumn(name)
@@ -56,6 +57,16 @@ namespace UserService.Dummy
                 AllowDBNull = isNullable,
                 MaxLength = length
             };
+        }
+        public bool InsertNewUser(string name, string password, string email)
+        {
+            var row = Table.NewRow();
+            row["Name"] = name;
+            row["Password"] = password;
+            row["Email"] = email;
+            row["RegistrationDate"] = DateTime.Now;
+            Table.Rows.Add(row);
+            return true;
         }
     }
 }

@@ -32,16 +32,9 @@ namespace UserService
             throw new Exception("Username not found!");
         }
 
-        public bool NewUser(string name, string password, string email, DateTime regDate)
+        public bool NewUser(string name, string password, string email)
         {
-            int oldSize = factory.Table.Rows.Count;
-            var row = factory.Table.NewRow();
-            row["Name"] = name;
-            row["Password"] = password;
-            row["Email"] = email;
-            row["RegistrationDate"] = regDate;
-            factory.Table.Rows.Add(row);
-            return oldSize != factory.Table.Rows.Count; 
+            return factory.InsertNewUser(name, password, email); 
         }
     }
 }

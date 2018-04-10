@@ -11,7 +11,7 @@ namespace UserService
         User GetUser(string name, string password);
 
         [OperationContract]
-        bool NewUser(string name, string password, string email, DateTime regDate);
+        bool NewUser(string name, string password, string email);
 
         // prop Connection
     }
