@@ -19,14 +19,29 @@ namespace UserService
         /// when want to login
         public User GetUser(string name, string password)
         {
-            var row = factory.Table.Select("Name = " + name);
-            
-            return null;
+            string expression = "Name = '" + name + "'";
+            var row = factory.Table.Select(String.Format("Name = '{0}'", name))[0];
+            if (row != null)
+            {
+                return new User(
+                    (int)row["Id"],
+                    (string)row["Name"],
+                    (string)row["Email"],
+                    (DateTime)row["RegistrationDate"]);
+            }
+            throw new Exception("Username not found!");
         }
 
-        public void NewUser(string name, string password, string email, DateTime regDate)
+        public bool NewUser(string name, string password, string email, DateTime regDate)
         {
-            throw new NotImplementedException();
+            int oldSize = factory.Table.Rows.Count;
+            var row = factory.Table.NewRow();
+            row["Name"] = name;
+            row["Password"] = password;
+            row["Email"] = email;
+            row["RegistrationDate"] = regDate;
+            factory.Table.Rows.Add(row);
+            return oldSize != factory.Table.Rows.Count; 
         }
     }
 }
