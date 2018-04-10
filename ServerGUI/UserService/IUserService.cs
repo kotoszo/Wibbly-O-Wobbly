@@ -16,7 +16,7 @@ namespace UserService
 
         [OperationContract]
         void NewUser(string name, string password, string email, DateTime regDate);
-        
+
         // prop Connection
     }
 }
