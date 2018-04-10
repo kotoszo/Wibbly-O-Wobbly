@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbHandler", "DbHandler\DbHa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{1FC0D8F9-990A-401E-86BB-BD8C4523FBDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceTests", "UserServiceTests\UserServiceTests.csproj", "{A0E4C5BB-60D5-4370-BB9F-BA484AD8FBAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1FC0D8F9-990A-401E-86BB-BD8C4523FBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FC0D8F9-990A-401E-86BB-BD8C4523FBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FC0D8F9-990A-401E-86BB-BD8C4523FBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E4C5BB-60D5-4370-BB9F-BA484AD8FBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E4C5BB-60D5-4370-BB9F-BA484AD8FBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E4C5BB-60D5-4370-BB9F-BA484AD8FBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E4C5BB-60D5-4370-BB9F-BA484AD8FBAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
