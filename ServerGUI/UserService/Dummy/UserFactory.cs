@@ -22,7 +22,7 @@ namespace UserService.Dummy
             {
                 DataRow row = Table.NewRow();
                 row[Columns[0]] = String.Format("{0} {1}", firstNames[i], lastNames[i]);
-                row[Columns[1]] = String.Format("{0} {1}{2}", firstNames[i], lastNames[i], "gmail.com");
+                row[Columns[1]] = String.Format("{0} {1}{2}", firstNames[i], lastNames[i], "@gmail.com");
                 row[Columns[2]] = "123";
                 row["RegistrationDate"] = DateTime.Now;
                 Table.Rows.Add(row);
