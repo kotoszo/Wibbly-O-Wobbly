@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using UserService;
+using System.Drawing;
+using System.ServiceModel;
+using System.Windows.Forms;
 
 namespace ServerGUI
 {
-    
     public partial class Form1 : Form
     {
         ServiceHost service;
@@ -56,6 +49,7 @@ namespace ServerGUI
             service.Open();
             return service.State;
         }
+
         private CommunicationState CloseService()
         {
             service.Close();

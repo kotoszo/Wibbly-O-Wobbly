@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using NUnit.Framework;
 
 namespace UserService.Dummy.Tests
@@ -47,7 +48,18 @@ namespace UserService.Dummy.Tests
         {
             Assert.True(factory.Table.Columns.Contains(column));
         }
-
+        [Test]
+        public void Test_CreateNewRow()
+        {
+            int oldSize = factory.Table.Rows.Count;
+            DataRow row = factory.Table.NewRow();
+            row["Name"] = "teszt";
+            row["Email"] = "teszt";
+            row["Password"] = "teszt";
+            row["RegistrationDate"] = DateTime.Now;
+            factory.Table.Rows.Add(row);
+            Assert.AreNotEqual(oldSize, factory.Table.Rows.Count);
+        }
         [TearDown]
         public void Close()
         {
