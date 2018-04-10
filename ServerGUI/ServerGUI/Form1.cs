@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserService;
 
 namespace ServerGUI
 {
@@ -34,21 +35,23 @@ namespace ServerGUI
             if (isOn)
             {
                 StateIndicator(Color.Green);
+                button1.Text = "Stop";
                 StartService();
             }
             else
             {
                 StateIndicator(Color.Red);
+                button1.Text = "Start";
                 CloseService();
             }
         }
         private CommunicationState StartService()
         {
-            Uri address = new Uri("");
+            Uri address = new Uri("net.tcp://localhost:2202/UserService");
             NetTcpBinding binding = new NetTcpBinding();
 
-            //service = new ServiceHost(typeof(UserService), address);
-            //service.AddServiceEndpoint(typeof(IService), binding, address);
+            service = new ServiceHost(typeof(UserService.UserService), address);
+            service.AddServiceEndpoint(typeof(IUserService), binding, address);
 
             service.Open();
             return service.State;
