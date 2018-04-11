@@ -13,7 +13,6 @@ namespace DbHandler
     {
         private const string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=testpassword; Database=wowUser";
 
-        private DataSet ds = new DataSet();
         private DataTable dt = new DataTable();
 
 
@@ -85,7 +84,7 @@ namespace DbHandler
         //TODO: More elegent solution for getting only one row of data.
         public DataRow GetUserData(int id)
         {
-            ds.Reset();
+            dt.Reset();
             DataRow result;
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
@@ -102,7 +101,7 @@ namespace DbHandler
 
         public DataRow[] GetAllData()
         {
-            ds.Reset();
+            dt.Reset();
             DataRow[] result;
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
@@ -110,8 +109,7 @@ namespace DbHandler
                 string query = "SELECT * FROM userinfo";
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, conn);
 
-                adapter.Fill(ds);
-                dt = ds.Tables[0];
+                adapter.Fill(dt);
                 result = dt.Select();
             }
             return result;
