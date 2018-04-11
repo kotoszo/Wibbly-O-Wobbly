@@ -31,30 +31,21 @@ namespace Hub.Controllers
             private set { _userService = value; }
         }
 
-        // GET api/values
         public IEnumerable<User> Get()
         {
             return UserServ.GetAllUser();
         }
 
-        // GET api/values/5
         public string Get(int id)
         {
             return UserServ.GetUser(id).ToString();
         }
 
-        // POST api/values
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
         public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
         {
         }
     }
