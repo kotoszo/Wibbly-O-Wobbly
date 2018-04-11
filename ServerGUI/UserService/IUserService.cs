@@ -1,6 +1,7 @@
 ﻿using System;
 using UserService.Model;
 using System.ServiceModel;
+using System.Collections.Generic;
 
 namespace UserService
 {
@@ -8,11 +9,12 @@ namespace UserService
     public interface IUserService
     {
         [OperationContract]
-        User GetUser(string hashed);
+        User GetUser(int id);
 
         [OperationContract]
         bool NewUser(string name, string password, string email);
 
-        // prop Connection
+        [OperationContract]
+        List<User> GetAllUser();
     }
 }

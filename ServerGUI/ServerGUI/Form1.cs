@@ -38,7 +38,7 @@ namespace ServerGUI
                 CloseService();
             }
         }
-        private CommunicationState StartService()
+        private void StartService()
         {
             Uri address = new Uri("net.tcp://localhost:2202/UserService");
             NetTcpBinding binding = new NetTcpBinding();
@@ -47,13 +47,12 @@ namespace ServerGUI
             service.AddServiceEndpoint(typeof(IUserService), binding, address);
 
             service.Open();
-            return service.State;
         }
 
-        private CommunicationState CloseService()
+        private void CloseService()
         {
             service.Close();
-            return service.State;
+            service = null;
         }
         private void StateIndicator(Color color)
         {
