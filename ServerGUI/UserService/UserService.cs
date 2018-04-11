@@ -1,9 +1,8 @@
 ﻿using System;
-using UserService.Dummy;
+using System.Data;
 using UserService.Model;
 using System.ServiceModel;
-using DbHandler;
-using System.Data;
+using System.Collections.Generic;
 
 namespace UserService
 {
@@ -11,7 +10,6 @@ namespace UserService
     public class UserService : IUserService
     {
         DbHandler.DbHandler handler;
-        UserFactory factory;
         public UserService()
         {
             handler = new DbHandler.DbHandler();
@@ -21,27 +19,58 @@ namespace UserService
         {
             return handler.loginUser(name, password);
         }
-        public User GetUser(string id)
+        public List<User> GetUsers()
         {
-            if(int.TryParse(id, out int intId))
+            var rows = handler.GetAllData();
+            List<User> list = new List<User>();
+            foreach (var row in rows)
             {
-                DataRow row = handler.GetUserData(intId);
-                if (row != null)
-                {
-                    return new User(
+                list.Add(new User(
                         (int)row["Id"],
                         (string)row["Name"],
                         (string)row["Email"],
-                        (DateTime)row["RegistrationDate"]);
-                }
+                        (DateTime)row["RegistrationDate"]));
+            }
+            return list;
+        }
+        public User GetUser(int id)
+        {
+            DataRow row = handler.GetUserData(id);
+            if (row != null)
+            {
+                User user = new User
+                {
+                    Id = (int)row["Id"],
+                    Name = (string)row["Name"],
+                    Email = (string)row["Email"],
+                    RegDate = (DateTime)row["RegistrationDate"]
+                };
+                return user;
             }
             throw new Exception("Username not found!");
         }
-
         public bool NewUser(string name, string password, string email)
         {
             string hashed = Hasher.GenerateSHA512String(password);
             return handler.Registration(name, email, hashed); 
+        }
+
+        public List<User> GetAllUser()
+        {
+            var rows = handler.GetAllData();
+            List<User> list = new List<User>();
+            foreach (var row in rows)
+            {
+                User user = new User
+                {
+                    Id = (int)row["Id"],
+                    Name = (string)row["Name"],
+                    Email = (string)row["Email"],
+                    RegDate = (DateTime)row["RegistrationDate"]
+                };
+                list.Add(user);
+            }
+            return list;
         }
     }
 }
