@@ -1,0 +1,69 @@
+﻿using System;
+using UserService;
+using System.Drawing;
+using System.ServiceModel;
+using System.Windows.Forms;
+
+namespace ServerGUI
+{
+    public partial class Form1 : Form
+    {
+        ServiceHost service;
+
+        public Form1()
+        {
+            InitializeComponent();
+            button1.Text = "Start";
+            StateIndicator(Color.Red);
+        }
+
+        bool isOn;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            isOn = !isOn;
+            ServerStateChange();
+        }
+        private void ServerStateChange()
+        {
+            if (isOn)
+            {
+                StateIndicator(Color.Green);
+                button1.Text = "Stop";
+                StartService();
+            }
+            else
+            {
+                StateIndicator(Color.Red);
+                button1.Text = "Start";
+                CloseService();
+            }
+        }
+        private void StartService()
+        {
+            Uri address = new Uri("net.tcp://localhost:2202/UserService");
+            NetTcpBinding binding = new NetTcpBinding();
+
+            service = new ServiceHost(typeof(UserService.UserService), address);
+            service.AddServiceEndpoint(typeof(IUserService), binding, address);
+
+            service.Open();
+        }
+
+        private void CloseService()
+        {
+            service.Close();
+            service = null;
+        }
+        private void StateIndicator(Color color)
+        {
+            using(SolidBrush brush = new SolidBrush(color))
+            {
+                using(Graphics circle = pBox.CreateGraphics())
+                {
+                    circle.FillEllipse(brush, new Rectangle(0, 0, 25, 25));
+                }
+            }
+            
+        }
+    }
+}
