@@ -22,7 +22,7 @@ namespace DbHandler
         {
             NpgsqlConnection _connPg = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres;Password=testpassword;");
 
-            FileInfo file = new FileInfo(@"C:\C#\00000Personal\backup\create");
+            FileInfo file = new FileInfo(@"C:\C#\00000Personal\backup\createdb");
             string script = file.OpenText().ReadToEnd();
             var m_createdb_cmd = new NpgsqlCommand(script, _connPg);
             _connPg.Open();
