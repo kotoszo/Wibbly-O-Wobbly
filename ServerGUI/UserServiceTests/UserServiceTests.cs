@@ -28,7 +28,7 @@ namespace UserService.Tests
         [Test]
         public void GetUserTest()
         {
-            Assert.NotNull(service.GetUser("Mari Kis", "123"));
+            Assert.NotNull(service.GetUser("2"));
         }
 
         [Test]

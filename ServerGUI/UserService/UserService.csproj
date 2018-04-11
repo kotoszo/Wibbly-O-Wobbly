@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dummy\UserFactory.cs" />
+    <Compile Include="Hasher.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DbHandler\DbHandler.csproj">
+      <Project>{91e25bc8-6b25-458b-a1eb-231faa504890}</Project>
+      <Name>DbHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -8,7 +8,7 @@ namespace UserService
     public interface IUserService
     {
         [OperationContract]
-        User GetUser(string name, string password);
+        User GetUser(string hashed);
 
         [OperationContract]
         bool NewUser(string name, string password, string email);

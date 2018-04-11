@@ -2,39 +2,46 @@
 using UserService.Dummy;
 using UserService.Model;
 using System.ServiceModel;
+using DbHandler;
+using System.Data;
 
 namespace UserService
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
-        // prop to DbHandler
+        DbHandler.DbHandler handler;
         UserFactory factory;
         public UserService()
         {
-            // DbHandler = new ..()
-            factory = new UserFactory();
+            handler = new DbHandler.DbHandler();
             
         }
-        /// when want to login
-        public User GetUser(string name, string password)
+        public int LogIn(string name, string password)
         {
-            string expression = "Name = '" + name + "'";
-            var row = factory.Table.Select(String.Format("Name = '{0}'", name))[0];
-            if (row != null)
+            return handler.loginUser(name, password);
+        }
+        public User GetUser(string id)
+        {
+            if(int.TryParse(id, out int intId))
             {
-                return new User(
-                    (int)row["Id"],
-                    (string)row["Name"],
-                    (string)row["Email"],
-                    (DateTime)row["RegistrationDate"]);
+                DataRow row = handler.GetUserData(intId);
+                if (row != null)
+                {
+                    return new User(
+                        (int)row["Id"],
+                        (string)row["Name"],
+                        (string)row["Email"],
+                        (DateTime)row["RegistrationDate"]);
+                }
             }
             throw new Exception("Username not found!");
         }
 
         public bool NewUser(string name, string password, string email)
         {
-            return factory.InsertNewUser(name, password, email); 
+            string hashed = Hasher.GenerateSHA512String(password);
+            return handler.Registration(name, email, hashed); 
         }
     }
 }
