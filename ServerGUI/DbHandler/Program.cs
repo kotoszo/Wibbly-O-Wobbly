@@ -10,7 +10,6 @@ namespace DbHandler
     {
         static void Main(string[] args)
         {
-
         }
     }
 }
