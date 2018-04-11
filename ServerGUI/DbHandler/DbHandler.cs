@@ -20,11 +20,11 @@ namespace DbHandler
         public DbHandler()
         {
             ConnectionStringSettingsCollection x = ConfigurationManager.ConnectionStrings;
-            connStr = x["connString"].ConnectionString;
-            if(connStr == null)
+            if (x["connString"] == null)
             {
                 throw new Exception("Config file not found");
             }
+            connStr = x["connString"].ConnectionString;
         }
 
         public void createDb()
