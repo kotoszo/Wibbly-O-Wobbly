@@ -6,17 +6,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace DbHandler
 {
     public class DbHandler
     {
-        private const string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=testpassword; Database=wowUser";
+        private readonly string connStr;
 
         private DataTable dt = new DataTable();
 
 
-        public DbHandler() { }
+        public DbHandler()
+        {
+            ConnectionStringSettingsCollection x = ConfigurationManager.ConnectionStrings;
+            connStr = x[1].ConnectionString;
+            if(connStr == null)
+            {
+                throw new Exception("Config file not found");
+            }
+        }
 
         public void createDb()
         {
