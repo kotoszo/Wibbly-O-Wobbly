@@ -26,15 +26,21 @@ namespace UserService.Tests
         }
 
         [Test]
-        public void GetUserTest()
+        public void GetUserTest_NotNull()
         {
-            Assert.NotNull(service.GetUser("2"));
+            Assert.NotNull(service.GetUser(8));
         }
-
+        [Test]
+        public void GetUserTest_SameId()
+        {
+            //Model.User user = service.GetUser(9);
+            //Assert.AreEqual(user.Id, 9);
+        }
         [Test]
         public void NewUserTest()
         {
-            Assert.True(service.NewUser("Jenő", "123", "alma"));
+            int rng = new Random().Next(100, 100000);
+            Assert.True(service.NewUser("Jenő", "123", rng.ToString()));
         }
     }
 }
