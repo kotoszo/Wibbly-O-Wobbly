@@ -10,6 +10,8 @@ namespace DbHandler
     {
         static void Main(string[] args)
         {
+            DbHandler x = new DbHandler();
+            x.createDb();
         }
     }
 }
