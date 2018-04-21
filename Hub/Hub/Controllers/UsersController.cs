@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.ServiceModel;
 using UserService;
+using System.Web.Http;
 using UserService.Model;
-using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Collections.Generic;
 
 namespace Hub.Controllers
 {
@@ -41,8 +37,10 @@ namespace Hub.Controllers
             return UserServ.GetUser(id).ToString();
         }
 
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public string Post(Models.FormModel user)
         {
+            return "Hello " + user.ToString();
         }
 
         public void Put(int id, [FromBody]string value)
