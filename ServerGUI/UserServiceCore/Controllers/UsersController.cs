@@ -16,16 +16,14 @@ namespace UserServiceCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var users = Program.service.GetAllData().Rows;
-            return Json(users);
-            //return new string[] { "value1", "value2" };
+            return Json(Program.service.GetAllData().Rows);
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            return Json(Program.service.GetUserData(id));
         }
 
         // POST api/users
