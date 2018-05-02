@@ -36,7 +36,7 @@ namespace UserServiceCore
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
