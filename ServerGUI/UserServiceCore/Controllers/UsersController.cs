@@ -11,7 +11,6 @@ namespace UserServiceCore.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        
         // GET api/users
         [HttpGet]
         public IActionResult Get()
