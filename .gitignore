@@ -217,3 +217,5 @@ FakesAssemblies/
 _Pvt_Extensions
 
 ServerGUI/DbHandler/dbConnection\.config
+
+ServerGUI/ServerGUI/dbConnection\.config
