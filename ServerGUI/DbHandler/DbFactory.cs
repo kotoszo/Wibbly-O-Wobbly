@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DbHandler
+{
+    public static class DbFactory
+    {
+        public static IDbHandler GetService()
+        {
+            return new DbHandler();
+        }
+    }
+}
