@@ -18,6 +18,7 @@ namespace UserServiceCore.Controllers
         public IActionResult Get()
         {
             List<User> users = new List<User>();
+            
             foreach (DataRow userRow in Program.service.GetAllData().Rows)
             {
                 users.Add(UserConverter.CreateUser(userRow));
@@ -29,25 +30,27 @@ namespace UserServiceCore.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Json(Program.service.GetUserData(id));
+            return Json(UserConverter.CreateUser(Program.service.GetUserData(id)));
         }
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]User user)
         {
+            Program.service.Registration(user.Name, user.Email, user.Password);
         }
 
+        // TODO later
         // PUT api/users/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/users/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/users/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
