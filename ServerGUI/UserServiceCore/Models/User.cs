@@ -14,6 +14,11 @@ namespace UserServiceCore.Models
         public DateTime RegDate { get; set; }
         public string Password { get; set; }
 
+        public User()
+        {
+
+        }
+        
         public User(int id, string name, string email, DateTime regTime, string password = "kamupw")
         {
             Id = id;
