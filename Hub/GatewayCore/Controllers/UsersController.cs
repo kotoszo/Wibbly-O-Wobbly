@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft;
+using Newtonsoft.Json;
+
+namespace GatewayCore.Controllers
+{
+    [Route("api/[controller]")]
+    public class UsersController : Controller
+    {
+        HttpClient client = new HttpClient();
+        // GET api/values
+        [HttpGet]
+        public IActionResult Get()
+        {
+            // todo something
+            return GetHelper("http://localhost:61926/api/users");
+        }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            if(id >= 0)
+            {
+                return GetHelper("http://localhost:61926/api/users/" + id);
+            }
+            return new StatusCodeResult(404);
+        }
+
+        private IActionResult GetHelper(string uri)
+        {
+            HttpResponseMessage response = client.GetAsync(uri).Result;
+            string stringData = response.Content.ReadAsStringAsync().Result;
+            return new ObjectResult(JsonConvert.DeserializeObject(stringData));
+        }
+
+        // POST api/values
+        [HttpPost]
+        public void Post([FromBody]string value)
+        {
+        }
+
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
+    }
+}
