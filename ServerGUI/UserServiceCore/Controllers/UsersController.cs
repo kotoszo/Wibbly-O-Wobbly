@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StorageHandler;
 using System.Data;
+using UserServiceCore.Models;
+using UserServiceCore.Utils;
 
 namespace UserServiceCore.Controllers
 {
@@ -15,7 +17,12 @@ namespace UserServiceCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(Program.service.GetAllData().Rows);
+            List<User> users = new List<User>();
+            foreach (DataRow userRow in Program.service.GetAllData().Rows)
+            {
+                users.Add(UserConverter.CreateUser(userRow));
+            }
+            return Json(users);
         }
 
         // GET api/users/5

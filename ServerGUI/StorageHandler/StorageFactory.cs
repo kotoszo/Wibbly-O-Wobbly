@@ -6,7 +6,7 @@ namespace StorageHandler
 {
     public static class StorageFactory
     {
-        public static StorageService GetService()
+        public static IStorageService GetService()
         {
             return new StorageService();
         }
