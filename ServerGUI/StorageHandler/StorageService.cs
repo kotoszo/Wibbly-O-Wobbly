@@ -17,8 +17,7 @@ namespace StorageHandler
 
         public DataTable GetAllData()
         {
-            //DataRow[] result;
-             
+            dt.Reset();
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
                 conn.Open();
@@ -26,7 +25,6 @@ namespace StorageHandler
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, conn);
 
                 adapter.Fill(dt);
-                //result = dt.Select();
             }
             return dt;
         }
