@@ -10,26 +10,26 @@ using System.Configuration;
 
 namespace DbHandler
 {
-    public class DbHandler
+    public class DbHandler : IDbHandler
     {
         private readonly string connStr;
 
         private DataTable dt = new DataTable();
-
-
+        
         public DbHandler()
         {
-            ConnectionStringSettingsCollection x = ConfigurationManager.ConnectionStrings;
-            if (x["connString"] == null)
-            {
-                throw new Exception("Config file not found");
-            }
-            connStr = x["connString"].ConnectionString;
+            //ConnectionStringSettingsCollection x = ConfigurationManager.ConnectionStrings;
+            //if (x["connString"] == null)
+            //{
+            //    throw new Exception("Config file not found");
+            //}
+            //connStr = x["connString"].ConnectionString;
+            connStr = "Server=localhost;Port=5432;User Id=postgres;Password=142536789;Database=wowUser";
         }
 
-        public void createDb()
+        public void CreateDb()
         {
-            NpgsqlConnection _connPg = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres;Password=testpassword;");
+            NpgsqlConnection _connPg = new NpgsqlConnection(connStr);
 
             FileInfo file = new FileInfo(@"C:\C#\00000Personal\backup\createdb");
             string script = file.OpenText().ReadToEnd();
@@ -55,7 +55,7 @@ namespace DbHandler
                     {
                         cmd.Connection = conn;
                         cmd.CommandText = "INSERT INTO userinfo(name, email, registrationdate, password) " +
-                                                           "VALUES(@name, @email, @regdate, @password);";
+                                                           "users(@name, @email, @regdate, @password);";
 
                         cmd.Parameters.AddWithValue("name", name);
                         cmd.Parameters.AddWithValue("email", email);
@@ -71,7 +71,7 @@ namespace DbHandler
             return result;
         }
 
-        public int loginUser(string name, string pw)
+        public int LoginUser(string name, string pw)
         {
             int userId = 0;
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))

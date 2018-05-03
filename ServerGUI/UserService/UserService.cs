@@ -17,7 +17,7 @@ namespace UserService
         }
         public int LogIn(string name, string password)
         {
-            return handler.loginUser(name, password);
+            return handler.LoginUser(name, password);
         }
         public List<User> GetUsers()
         {

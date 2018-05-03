@@ -69,12 +69,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserService\UserService.csproj">
-      <Project>{1FC0D8F9-990A-401E-86BB-BD8C4523FBDF}</Project>
-      <Name>UserService</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

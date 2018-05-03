@@ -36,7 +36,7 @@ namespace DbHandler
 
         private static void timer(string query)
         {
-            string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=testpassword; Database=Item";
+            string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=142536789;Database=wowUser";
             DataTable a = new DataTable();
 
             var time = DateTime.Now;
