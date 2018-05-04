@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace UserServiceCore.Models
+namespace UserModel
 {
     public class User
     {
@@ -18,7 +18,7 @@ namespace UserServiceCore.Models
         {
 
         }
-        
+
         public User(int id, string name, string email, DateTime regTime, string password = "kamupw")
         {
             Id = id;
@@ -28,13 +28,4 @@ namespace UserServiceCore.Models
             Password = password;
         }
     }
-    //public class WebApiDataContext : DbContext
-    //{
-
-    //    public DbSet<User> Users { get; set; }
-
-    //    public WebApiDataContext(DbContextOptions<WebApiDataContext> options) : base(options)
-    //    {
-    //    }
-    //}
 }
