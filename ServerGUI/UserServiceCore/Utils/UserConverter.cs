@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using UserServiceCore.Models;
+using UserModel;
 
 namespace UserServiceCore.Utils
 {

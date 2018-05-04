@@ -33,8 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UserModel">
+      <HintPath>..\..\ConsoleApp1\UserModel\bin\Debug\UserModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

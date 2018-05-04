@@ -8,9 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using UserServiceCore.Models;
 using Npgsql;
-
 namespace UserServiceCore
 {
     public class Startup
