@@ -11,7 +11,7 @@ namespace UserModel
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime RegDate { get; set; }
+        public string RegDate { get; set; }
         public string Password { get; set; }
 
         public User()
@@ -24,7 +24,7 @@ namespace UserModel
             Id = id;
             Name = name;
             Email = email;
-            RegDate = regTime;
+            RegDate = regTime.ToString("dd/MM/yyyy");
             Password = password;
         }
     }
