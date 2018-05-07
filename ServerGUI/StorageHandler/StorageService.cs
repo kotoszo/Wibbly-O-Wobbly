@@ -11,7 +11,7 @@ namespace StorageHandler
 
         internal StorageService()
         {
-            connStr = "Server=localhost;Port=5432;User Id=postgres;Password=142536789;Database=wowUser";
+            connStr = "Server=localhost;Port=5432;User Id=postgres;Password=testpassword;Database=wowUser";
             dt = new DataTable();
         }
 

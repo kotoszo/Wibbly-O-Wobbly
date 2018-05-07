@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StorageHandler;
 using System.Data;
-using UserServiceCore.Models;
 using UserServiceCore.Utils;
+using UserModel;
 
 namespace UserServiceCore.Controllers
 {
