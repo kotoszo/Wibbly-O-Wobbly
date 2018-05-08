@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using API.Models;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly PaymentContext _context;
+
+        public ValuesController(PaymentContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Item> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new Item[] { _context.Items.Find(1) };    
+            //return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
@@ -27,6 +36,7 @@ namespace API.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+
         }
 
         // PUT api/values/5
