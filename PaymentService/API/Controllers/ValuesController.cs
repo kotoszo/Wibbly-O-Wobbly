@@ -19,10 +19,18 @@ namespace API.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<Item> Get()
+        //public IEnumerable<Item> Get()
+        public IEnumerable<object> Get()
         {
-            return new Item[] { _context.Items.Find(1) };    
-            //return new string[] { "value1", "value2" };
+            var items = from A in _context.Orders
+                        from B in _context.Items.Where(x => x.OrderId == A.Id).DefaultIfEmpty()
+                        select new
+                        {
+                            OrderId = A.Id,
+                            UserId = A.UserId,
+                            ItemId = B.ItemId
+                        };
+            return items;
         }
 
         // GET api/values/5
