@@ -37,18 +37,37 @@ namespace BikeItemService.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            
-            return new string[] { "value1", "value2" };
+            List<BikeItem> list = new List<BikeItem>();
+            list = _context.BikeItems.ToList();
+            foreach (var item in list)
+            {
+                item.Supplier = _context.Suppliers.Find(item.SupplierId);
+            }
+
+            return Json(list);
         }
+
+        //tipus alapján keresés
+        //supplier alapján keresni
+        //ár alapján keresés min-max
+
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var bike = _context.BikeItems.Find(id);
+            if(bike == null)
+            {
+                return new StatusCodeResult(404);
+            }
+            bike.Supplier = _context.Suppliers.Find(bike.SupplierId);
+            return Json(bike);
         }
+
+        //hozzáadni új kerót
 
         // POST api/<controller>
         [HttpPost]
@@ -56,11 +75,15 @@ namespace BikeItemService.Controllers
         {
         }
 
+        //megváltoztatni adatot
+
         // PUT api/<controller>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
+
+        //törölni bicót id alapján
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
