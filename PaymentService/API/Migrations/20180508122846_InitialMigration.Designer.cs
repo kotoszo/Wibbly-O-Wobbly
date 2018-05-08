@@ -10,9 +10,10 @@ using System;
 namespace API.Migrations
 {
     [DbContext(typeof(PaymentContext))]
-    partial class PaymentContextModelSnapshot : ModelSnapshot
+    [Migration("20180508122846_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
