@@ -51,7 +51,6 @@ namespace BikeItemService.Controllers
 
 
         //típus alapján keresés
-        //supplier alapján keresni
         //ár alapján keresés min-max
         //bármi alapján keresés
 
@@ -82,6 +81,18 @@ namespace BikeItemService.Controllers
             foreach (var item in bikes)
             {
                 item.Supplier = sup;
+            }
+            return Json(bikes);
+        }
+
+        [HttpGet(@"search/type/{type}")]
+        public IActionResult GetByType(string type)
+        {
+            var bikes = _context.BikeItems.Where(x => x.BikeType == type);
+            
+            foreach (var bike in bikes)
+            {
+                bike.Supplier = _context.Suppliers.Find(bike.SupplierId);
             }
             return Json(bikes);
         }
