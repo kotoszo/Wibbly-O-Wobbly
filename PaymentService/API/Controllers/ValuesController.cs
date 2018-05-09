@@ -35,9 +35,18 @@ namespace API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IEnumerable<object> Get(int id)
         {
-            return "value";
+            var items = from order in _context.Orders
+                        from item in _context.Items.Where(x => x.OrderId == order.Id).DefaultIfEmpty()
+                        where order.Id == id
+                        select new
+                        {
+                            OrderId = order.Id,
+                            UserId = order.UserId,
+                            ItemId = item.ItemId
+                        };
+            return items;
         }
 
         // POST api/values
