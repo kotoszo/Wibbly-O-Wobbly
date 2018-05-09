@@ -17,22 +17,6 @@ namespace BikeItemService.Controllers
         public BikeItemController(BikeItemContext context)
         {
             _context = context;
-            //if (_context.Suppliers.Count() == 0)
-            //{
-            //    _context.Suppliers.Add(new Supplier { SupplierName = "SuperSupplier" });
-            //    _context.SaveChanges();
-            //}
-            //if (_context.BikeItems.Count() == 0)
-            //{
-            //    _context.BikeItems.Add(new BikeItem
-            //    {
-            //        BikeName = "SuperBike",
-            //        Price = 225000,
-            //        BikeType = "City",
-            //        SupplierId = _context.Suppliers.Find(1).SupplierId
-            //    });
-            //    _context.SaveChanges();
-            //}
         }
 
         // GET: api/<controller>
@@ -103,6 +87,7 @@ namespace BikeItemService.Controllers
             }
             return Json(bikes);
         }
+
         [HttpGet(@"search/{something}")]
         public IActionResult Search(string something)
         {
