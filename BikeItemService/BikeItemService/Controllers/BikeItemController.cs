@@ -49,14 +49,16 @@ namespace BikeItemService.Controllers
             return Json(list);
         }
 
-        //tipus alapján keresés
+
+        //típus alapján keresés
         //supplier alapján keresni
         //ár alapján keresés min-max
+        //bármi alapján keresés
 
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
             var bike = _context.BikeItems.Find(id);
             if(bike == null)
@@ -67,6 +69,22 @@ namespace BikeItemService.Controllers
             return Json(bike);
         }
 
+        [HttpGet(@"search/supplier/{supplier}")]
+        public IActionResult GetBySupplier(string supplier)
+        {
+            Supplier sup = _context.Suppliers.SingleOrDefault(s => s.SupplierName == supplier);
+            if (sup == null)
+            {
+                return new StatusCodeResult(404);
+            }
+            int supplierId = _context.Suppliers.Single(s => s.SupplierName == supplier).SupplierId;
+            var bikes = _context.BikeItems.Where(x => x.SupplierId == supplierId);
+            foreach (var item in bikes)
+            {
+                item.Supplier = sup;
+            }
+            return Json(bikes);
+        }
         //hozzáadni új kerót
 
         // POST api/<controller>
