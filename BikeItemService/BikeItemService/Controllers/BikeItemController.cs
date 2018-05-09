@@ -50,8 +50,6 @@ namespace BikeItemService.Controllers
         }
 
 
-        //típus alapján keresés
-        //ár alapján keresés min-max
         //bármi alapján keresés
 
 
@@ -96,6 +94,20 @@ namespace BikeItemService.Controllers
             }
             return Json(bikes);
         }
+
+        [HttpGet(@"search/price/{min}/{max}")]
+        public IActionResult GetByPrice(int min, int max)
+        {
+            var bikes = _context.BikeItems.Where(x => x.Price >= min && x.Price <= max);
+
+            foreach (var bike in bikes)
+            {
+                bike.Supplier = _context.Suppliers.Find(bike.SupplierId);
+            }
+            return Json(bikes);
+        }
+
+
         //hozzáadni új kerót
 
         // POST api/<controller>
