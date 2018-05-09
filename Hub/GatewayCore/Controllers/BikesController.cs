@@ -27,7 +27,32 @@ namespace GatewayCore.Controllers
         {
             return GetHelper(@"http://localhost:61933/api/bikeitem/" + id);
         }
-        
+
+        [HttpGet(@"search/supplier/{supplier}")]
+        public IActionResult GetBySupplier(string supplier)
+        {
+            return GetHelper(@"http://localhost:61933/api/bikeitem/search/supplier/" + supplier);
+        }
+
+
+        [HttpGet(@"search/type/{type}")]
+        public IActionResult GetByType(string type)
+        {
+            return GetHelper(@"http://localhost:61933/api/bikeitem/search/type/" + type);
+        }
+
+        [HttpGet(@"search/price/{min}/{max}")]
+        public IActionResult GetByPrice(int min, int max)
+        {
+            return GetHelper(String.Format(@"http://localhost:61933/api/bikeitem/search/price/{0}/{1}", min, max));
+        }
+
+        [HttpGet(@"search/{something}")]
+        public IActionResult Search(string something)
+        {
+            return GetHelper(@"http://localhost:61933/api/bikeitem/search/" + something);
+        }
+
 
         private IActionResult GetHelper(string uri)
         {
