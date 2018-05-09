@@ -96,7 +96,7 @@ namespace BikeItemService.Controllers
             return Json(bikes);
         }
 
-
+        //newComment
         //hozzáadni új kerót
 
         // POST api/<controller>
