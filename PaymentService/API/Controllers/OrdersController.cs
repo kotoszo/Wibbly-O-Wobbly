@@ -8,18 +8,17 @@ using API.Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class OrdersController : Controller
     {
         private readonly PaymentContext _context;
 
-        public ValuesController(PaymentContext context)
+        public OrdersController(PaymentContext context)
         {
             _context = context;
         }
 
         // GET api/values
         [HttpGet]
-        //public IEnumerable<Item> Get()
         public IEnumerable<object> Get()
         {
             var items = from A in _context.Orders
