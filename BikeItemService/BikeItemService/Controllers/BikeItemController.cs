@@ -50,9 +50,6 @@ namespace BikeItemService.Controllers
         }
 
 
-        //bármi alapján keresés
-
-
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -104,6 +101,13 @@ namespace BikeItemService.Controllers
             {
                 bike.Supplier = _context.Suppliers.Find(bike.SupplierId);
             }
+            return Json(bikes);
+        }
+        [HttpGet(@"search/{something}")]
+        public IActionResult Search(string something)
+        {
+            something = something.ToLower();
+            var bikes = _context.BikeItems.Where(x => x.BikeName.ToLower().Contains(something) || x.BikeType.ToLower().Contains(something));
             return Json(bikes);
         }
 
