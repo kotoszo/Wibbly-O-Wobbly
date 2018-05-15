@@ -8,62 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <NavigationView x:Name="NavView" Margin="0,52,0,0">
-
-            <!--<NavigationView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid Margin="24,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            --><!--<ColumnDefinition Width="*" MaxWidth="200"/>
-                            <ColumnDefinition Width="*" MaxWidth="200"/>--><!--
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            x:Name="HomePageLogo"
-                           Source="Assets/myPic/logo.jpg"
-                           VerticalAlignment="Center"
-                            Stretch="Uniform"
-                            Tapped="HomePageLogo_Tapped"/>
-                        --><!--<CommandBar Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            DefaultLabelPosition="Right"
-                            Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-                            <AppBarButton x:Name="Register" Label="Register" Icon="Refresh" Tapped="Register_Tapped"/>
-                            <AppBarButton x:Name="Login" Label="Login" Icon="Import" Tapped="Login_Tapped"/>
-                        </CommandBar>-->
-                        <!--<StackPanel Grid.Column="2"
-                                    VerticalAlignment="Top"
-                                    HorizontalAlignment="Right"
-                                    >
-                            <Button x:Name="Register"></Button>
-                            <Button x:Name="Login"></Button>
-                        </StackPanel>--><!--
-                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button x:Name="Register" Tapped="Register_Tapped">Register</Button>
-                            <Button x:Name="Login" Tapped="Login_Tapped" Content="{Binding}"></Button>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>-->
-            
-            <NavigationView.MenuItems>
-                <NavigationViewItemHeader Content="My Profile"/>
-                <NavigationViewItem x:Name="myProfile" Icon="Street" Content="My Profile" Tag="house" Tapped="myProfile_Tapped"/>
-                <NavigationViewItem x:Name="myOrders" Icon="Street" Content="My Orders" Tag="house" Tapped="myOrders_Tapped" />
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="WebShopStuff"/>
-                <NavigationViewItem Icon="Contact2" Content="Something" Tag="something"/>
-                <NavigationViewItem Icon="Camera" Content="Anything" Tag="anything"/>
-                <NavigationViewItem Icon="Pictures" Content="Asd" Tag="asd"/>
-            </NavigationView.MenuItems>
-            
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>
-            </NavigationView.AutoSuggestBox>
-        
-        </NavigationView>
         <StackPanel VerticalAlignment="Top" Height="52" Background="Black">
             <Grid Height="52">
                 <Grid.ColumnDefinitions>
@@ -82,5 +26,69 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
+        
+        <NavigationView x:Name="NavView" Margin="0,52,0,0">
+
+            <!--<NavigationView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Margin="24,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            -->
+            <!--<ColumnDefinition Width="*" MaxWidth="200"/>
+                            <ColumnDefinition Width="*" MaxWidth="200"/>-->
+            <!--
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            x:Name="HomePageLogo"
+                           Source="Assets/myPic/logo.jpg"
+                           VerticalAlignment="Center"
+                            Stretch="Uniform"
+                            Tapped="HomePageLogo_Tapped"/>
+                        -->
+            <!--<CommandBar Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            DefaultLabelPosition="Right"
+                            Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+                            <AppBarButton x:Name="Register" Label="Register" Icon="Refresh" Tapped="Register_Tapped"/>
+                            <AppBarButton x:Name="Login" Label="Login" Icon="Import" Tapped="Login_Tapped"/>
+                        </CommandBar>-->
+            <!--<StackPanel Grid.Column="2"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right"
+                                    >
+                            <Button x:Name="Register"></Button>
+                            <Button x:Name="Login"></Button>
+                        </StackPanel>-->
+            <!--
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="Register" Tapped="Register_Tapped">Register</Button>
+                            <Button x:Name="Login" Tapped="Login_Tapped" Content="{Binding}"></Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </NavigationView.HeaderTemplate>-->
+
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="My Profile"/>
+                <NavigationViewItem x:Name="myProfile" Icon="Street" Content="My Profile" Tag="house" Tapped="myProfile_Tapped"/>
+                <NavigationViewItem x:Name="myOrders" Icon="Street" Content="My Orders" Tag="house" Tapped="myOrders_Tapped" />
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="WebShopStuff"/>
+                <NavigationViewItem Icon="Contact2" Content="Something" Tag="something"/>
+                <NavigationViewItem Icon="Camera" Content="Anything" Tag="anything"/>
+                <NavigationViewItem Icon="Pictures" Content="Asd" Tag="asd"/>
+            </NavigationView.MenuItems>
+
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>
+            </NavigationView.AutoSuggestBox>
+
+            <Frame x:Name="ContentFrame" Margin="24">
+                
+            </Frame>
+        </NavigationView>
     </Grid>
 </Page>

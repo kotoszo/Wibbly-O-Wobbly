@@ -68,7 +68,10 @@ namespace UWPgui
 
         private void myProfile_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            loggedInUserId = 10;
             User user = GetUserProfile();
+            //Window.Current.Content = new UserPage();
+            ContentFrame.Content = new UserPage(user);
 
         }
 
@@ -94,5 +97,9 @@ namespace UWPgui
             return JsonConvert.DeserializeObject<User>(stringData);
         }
 
+        private void Frame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }
