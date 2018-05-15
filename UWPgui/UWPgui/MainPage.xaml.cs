@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -12,6 +13,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using UWPgui.Models;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,9 +26,73 @@ namespace UWPgui
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private static HttpClient client = new HttpClient();
+        private int? loggedInUserId = null;
+
+
         public MainPage()
         {
             this.InitializeComponent();
+
         }
+
+        private void AfterUserLogin()
+        {
+
+        }
+
+        private void HomePageLogo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //return to homepage
+        }
+
+        private async void Register_TappedAsync(object sender, TappedRoutedEventArgs e)
+        {
+            var asd = new Windows.UI.Popups.MessageDialog("anyad");
+            await asd.ShowAsync();
+        }
+
+        private void Login_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //idontcare.Visibility = Visibility.Collapsed;
+
+            var asd = new NavigationViewItem();
+            asd.Content = "asdasdasd";
+            NavView.MenuItems.Add(asd);
+        }
+
+        private void myProfile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            User user = GetUserProfile();
+
+        }
+
+        private void myOrders_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+        private User GetUserProfile()
+        {
+            HttpResponseMessage response = client.GetAsync("http://localhost:62956/api/users/" + loggedInUserId).Result;
+            string stringData = response.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<User>(stringData);
+        }
+
     }
 }
