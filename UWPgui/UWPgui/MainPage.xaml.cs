@@ -33,7 +33,7 @@ namespace UWPgui
         public MainPage()
         {
             this.InitializeComponent();
-
+            
         }
 
         private void AfterUserLogin()
@@ -46,10 +46,10 @@ namespace UWPgui
             //return to homepage
         }
 
-        private async void Register_TappedAsync(object sender, TappedRoutedEventArgs e)
+        private void Register_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var asd = new Windows.UI.Popups.MessageDialog("anyad");
-            await asd.ShowAsync();
+            ContentFrame.Content = new RegistrationPage();
+
         }
 
         private void Login_Tapped(object sender, TappedRoutedEventArgs e)

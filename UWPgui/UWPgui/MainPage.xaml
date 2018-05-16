@@ -21,7 +21,7 @@
                             Stretch="Uniform"
                             Tapped="HomePageLogo_Tapped"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="Register" Margin="5" Background="GhostWhite" Tapped="Register_TappedAsync">Register</Button>
+                    <Button x:Name="Register" Margin="5" Background="GhostWhite" Tapped="Register_Tapped">Register</Button>
                     <Button x:Name="Login" Margin="5" Background="GhostWhite" Tapped="Login_Tapped" Content="Login"></Button>
                 </StackPanel>
             </Grid>
@@ -86,7 +86,7 @@
                 <AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>
             </NavigationView.AutoSuggestBox>
 
-            <Frame x:Name="ContentFrame" Margin="24">
+            <Frame x:Name="ContentFrame" Margin="10">
                 
             </Frame>
         </NavigationView>
