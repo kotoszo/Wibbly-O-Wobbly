@@ -14,12 +14,15 @@ namespace GatewayCore.Controllers
     public class UsersController : Controller
     {
         HttpClient client = new HttpClient();
+        string uri = "http://localhost:61926/api/users";
+
+
         // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
             // todo something
-            return GetHelper("http://localhost:61926/api/users");
+            return GetHelper(uri);
         }
 
         // GET api/values/5
@@ -28,7 +31,7 @@ namespace GatewayCore.Controllers
         {
             if(id >= 0)
             {
-                return GetHelper("http://localhost:61926/api/users/" + id);
+                return GetHelper(uri + id);
             }
             return new StatusCodeResult(404);
         }
@@ -44,6 +47,7 @@ namespace GatewayCore.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            
         }
 
         // PUT api/values/5

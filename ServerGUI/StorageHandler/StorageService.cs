@@ -81,7 +81,7 @@ namespace StorageHandler
                     {
                         cmd.Connection = conn;
                         cmd.CommandText = "INSERT INTO userinfo(name, email, registrationdate, password) " +
-                                                           "users(@name, @email, @regdate, @password);";
+                                                           "values(@name, @email, @regdate, @password);";
 
                         cmd.Parameters.AddWithValue("name", name);
                         cmd.Parameters.AddWithValue("email", email);
