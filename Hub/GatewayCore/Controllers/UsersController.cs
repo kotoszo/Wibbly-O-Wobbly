@@ -45,9 +45,11 @@ namespace GatewayCore.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]User user)
         {
-            
+            HttpClient myClient = new HttpClient();
+            string jsonifiedUser = JsonConvert.SerializeObject(user);
+            myClient.PostAsync(uri, new StringContent(jsonifiedUser, System.Text.Encoding.UTF8, "application/json"));
         }
 
         // PUT api/values/5
