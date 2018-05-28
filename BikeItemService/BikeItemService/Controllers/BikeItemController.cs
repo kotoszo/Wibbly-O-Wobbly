@@ -39,7 +39,7 @@ namespace BikeItemService.Controllers
         public IActionResult GetById(int id)
         {
             var bike = _context.BikeItems.Find(id);
-            if(bike == null)
+            if (bike == null)
             {
                 return new StatusCodeResult(404);
             }

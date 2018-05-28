@@ -32,7 +32,7 @@ namespace StorageHandler
         public DataRow GetUserData(int id)
         {
             dt.Reset();
-            DataRow result;
+            DataRow result = null;
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
                 conn.Open();
@@ -41,7 +41,10 @@ namespace StorageHandler
 
 
                 adapter.Fill(dt);
-                result = dt.Rows[0];
+                if (dt.Rows.Count > 0)
+                {
+                    result = dt.Rows[0];
+                }
             }
             return result;
         }
@@ -72,25 +75,30 @@ namespace StorageHandler
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
                 conn.Open();
-                string query = "SELECT * FROM userinfo WHERE Email='" + email + "'";
+                string emailQuery = "SELECT * FROM userinfo WHERE Email='" + email + "'";
+                NpgsqlCommand emailCommand = new NpgsqlCommand(emailQuery, conn);
 
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
-                if (command.ExecuteScalar() == null)
+                if (emailCommand.ExecuteScalar() == null)
                 {
-                    using (var cmd = new NpgsqlCommand())
+                    string nameQuery = "SELECT * FROM userinfo WHERE Name='" + name + "'";
+                    NpgsqlCommand nameCommand = new NpgsqlCommand(nameQuery, conn);
+                    if (nameCommand.ExecuteScalar() == null)
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO userinfo(name, email, registrationdate, password) " +
-                                                           "values(@name, @email, @regdate, @password);";
+                        using (var cmd = new NpgsqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandText = "INSERT INTO userinfo(name, email, registrationdate, password) " +
+                                                               "values(@name, @email, @regdate, @password);";
 
-                        cmd.Parameters.AddWithValue("name", name);
-                        cmd.Parameters.AddWithValue("email", email);
-                        cmd.Parameters.AddWithValue("regdate", DateTime.Now);
-                        cmd.Parameters.AddWithValue("password", password);
-                        cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("name", name);
+                            cmd.Parameters.AddWithValue("email", email);
+                            cmd.Parameters.AddWithValue("regdate", DateTime.Now);
+                            cmd.Parameters.AddWithValue("password", password);
+                            cmd.ExecuteNonQuery();
+                        }
+                        result = true;
                     }
 
-                    result = true;
                 }
             }
 

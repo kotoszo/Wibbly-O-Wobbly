@@ -30,14 +30,21 @@ namespace UserServiceCore.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Json(UserConverter.CreateUser(Program.service.GetUserData(id)));
+            DataRow user = Program.service.GetUserData(id);
+            if (user == null)
+            {
+                return new StatusCodeResult(404);
+            }
+            User myUser = UserConverter.CreateUser(user);
+            return Json(myUser);
         }
 
         // POST api/users
         [HttpPost]
         public void Post([FromBody]User user)
         {
-            Program.service.Registration(user.Name, user.Email, user.Password);
+            bool x = Program.service.Registration(user.Name, user.Email, user.Password);
+            var y = 0;
         }
 
         // TODO later
