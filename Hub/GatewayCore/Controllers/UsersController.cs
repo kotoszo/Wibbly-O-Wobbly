@@ -14,7 +14,7 @@ namespace GatewayCore.Controllers
     public class UsersController : Controller
     {
         HttpClient client = new HttpClient();
-        string uri = "http://localhost:61926/api/users";
+        string uri = "http://localhost:61926/api/users/";
 
 
         // GET api/values
@@ -56,6 +56,7 @@ namespace GatewayCore.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/values/5
