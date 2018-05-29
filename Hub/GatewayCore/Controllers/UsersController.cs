@@ -56,6 +56,18 @@ namespace GatewayCore.Controllers
             }
             return new StatusCodeResult(409);
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync([FromBody]User user)
+        {
+            string jsonifiedUser = JsonConvert.SerializeObject(user);
+            var response = await client.PostAsync(uri + "login", new StringContent(jsonifiedUser, System.Text.Encoding.UTF8, "application/json"));
+            if (response.IsSuccessStatusCode)
+            {
+                var finalResult = response.Content.ReadAsStringAsync().Result;
+                return Ok(finalResult);
+            }
+            return new StatusCodeResult(401);
+        }
 
         // PUT api/values/5
         [HttpPut("{id}")]

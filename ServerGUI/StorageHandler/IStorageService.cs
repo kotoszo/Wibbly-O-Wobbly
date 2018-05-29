@@ -7,7 +7,7 @@ namespace StorageHandler
 {
     public interface IStorageService
     {
-        bool Registration(string name, string email, string password);
+        bool Registrate(string name, string email, string password);
 
         int LoginUser(string name, string pw);
 

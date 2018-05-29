@@ -51,7 +51,7 @@ namespace StorageHandler
 
         public int LoginUser(string name, string pw)
         {
-            int userId = 0;
+            int userId = -1;
             using (NpgsqlConnection conn = new NpgsqlConnection(connStr))
             {
                 conn.Open();
@@ -62,13 +62,17 @@ namespace StorageHandler
 
                     cmd.Parameters.AddWithValue("name", name);
                     cmd.Parameters.AddWithValue("password", pw);
-                    userId = (int)cmd.ExecuteScalar();
+                    var record = cmd.ExecuteScalar();
+                    if (record != null)
+                    {
+                        userId = (int)record;
+                    }
                 }
             }
             return userId;
         }
 
-        public bool Registration(string name, string email, string password)
+        public bool Registrate(string name, string email, string password)
         {
             bool result = false;
 

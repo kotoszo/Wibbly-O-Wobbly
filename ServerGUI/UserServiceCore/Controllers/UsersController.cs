@@ -43,14 +43,23 @@ namespace UserServiceCore.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]User user)
         {
-            bool userNotExists = Program.service.Registration(user.Name, user.Email, user.Password);
+            bool userNotExists = Program.service.Registrate(user.Name, user.Email, user.Password);
             if (userNotExists)
             {
                 return new StatusCodeResult(201);
             }
             return new StatusCodeResult(409);
         }
-
+        [HttpPost("login")]
+        public IActionResult Login([FromBody]User user)
+        {
+            int userId = Program.service.LoginUser(user.Name, user.Password);
+            if (userId != -1)
+            {
+                return Ok(userId);
+            }
+            return new StatusCodeResult(401);
+        }
         // TODO later
         // PUT api/users/5
         [HttpPut("{id}")]
