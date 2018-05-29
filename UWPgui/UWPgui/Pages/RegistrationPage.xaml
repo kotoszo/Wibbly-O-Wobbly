@@ -24,8 +24,17 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
+        <Flyout x:Key="FieldsNotFilledRightFlyout">
+            <TextBlock Text="Please fill in all the fields with valid data" Foreground="Red"/>
+        </Flyout>
+        <Flyout x:Key="AlredyExistFlyout">
+            <TextBlock Text="Username or email address alredy exist" Foreground="Red"/>
+        </Flyout>
+        <Flyout x:Key="SuccessFlyout">
+            <TextBlock Text="Successfully registrated" Foreground="Green"/>
+        </Flyout>
     </Page.Resources>
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="Page" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -42,14 +51,20 @@
             </Grid.RowDefinitions>
             <TextBlock Text="Register a new account" Grid.Row="0" Grid.ColumnSpan="2" 
                        FontSize="40"/>
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="Username :"/>
+            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+                <TextBlock Text="Username :"/>
+                <TextBlock Text="(min. 5 char)" Foreground="Red"/>
+            </StackPanel>
             <TextBlock Grid.Column="0" Grid.Row="2" Text="E-mail :"/>
             <TextBlock Grid.Column="0" Grid.Row="3" Text="E-mail confirmation :"/>
-            <TextBlock Grid.Column="0" Grid.Row="4" Text="Password :"/>
-            <TextBlock Grid.Column="0" Grid.Row="5" Text="Password confirmation :"/>
+            <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">
+                <TextBlock Text="Password :" VerticalAlignment="Center"/>
+                <TextBlock Text="(min. 5 character)" Foreground="Red"/>
+            </StackPanel>
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Password confirmation :"/>
             <!--input fileds-->
             <TextBox x:Name="userName" Grid.Column="1" Grid.Row="1" />
-            <TextBox x:Name="email" Grid.Column="1" Grid.Row="2" />
+            <TextBox x:Name="email" Grid.Column="1" Grid.Row="2" TextChanged="email_TextChanged"/>
             <TextBox x:Name="emailc" Grid.Column="1" Grid.Row="3" TextChanged="emailc_TextChanged"/>
             <PasswordBox x:Name="password" Grid.Column="1" Grid.Row="4" PasswordChanged="password_PasswordChanged"/>
             <PasswordBox x:Name="passwordc" Grid.Column="1" Grid.Row="5" PasswordChanged="passwordc_PasswordChanged"/>
@@ -57,6 +72,6 @@
             <SymbolIcon x:Name="passwordIcon" Grid.Column="2" Grid.Row="4"/>
             <SymbolIcon x:Name="passwordcIcon" Grid.Column="2" Grid.Row="5"/>
         <!--button-->
-            <Button x:Name="submit" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" Tapped="submit_Tapped" Content="Register"/>
+        <Button x:Name="submit" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" Tapped="submit_TappedAsync" Content="Register"/>
         </Grid>
 </Page>
