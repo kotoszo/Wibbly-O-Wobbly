@@ -41,10 +41,14 @@ namespace UserServiceCore.Controllers
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody]User user)
+        public IActionResult Post([FromBody]User user)
         {
-            bool x = Program.service.Registration(user.Name, user.Email, user.Password);
-            var y = 0;
+            bool userNotExists = Program.service.Registration(user.Name, user.Email, user.Password);
+            if (userNotExists)
+            {
+                return new StatusCodeResult(201);
+            }
+            return new StatusCodeResult(409);
         }
 
         // TODO later

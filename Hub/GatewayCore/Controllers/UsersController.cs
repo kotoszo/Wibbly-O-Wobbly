@@ -13,7 +13,7 @@ namespace GatewayCore.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        HttpClient client = new HttpClient();
+        private static HttpClient client = new HttpClient();
         string uri = "http://localhost:61926/api/users/";
 
 
@@ -45,11 +45,16 @@ namespace GatewayCore.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]User user)
+        public async Task<IActionResult> PostAsync([FromBody]User user)
         {
-            HttpClient myClient = new HttpClient();
+
             string jsonifiedUser = JsonConvert.SerializeObject(user);
-            myClient.PostAsync(uri, new StringContent(jsonifiedUser, System.Text.Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(uri, new StringContent(jsonifiedUser, System.Text.Encoding.UTF8, "application/json"));
+            if (response.IsSuccessStatusCode)
+            {
+                return new StatusCodeResult(201);
+            }
+            return new StatusCodeResult(409);
         }
 
         // PUT api/values/5
