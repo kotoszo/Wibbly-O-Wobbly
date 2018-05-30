@@ -27,7 +27,7 @@ namespace UWPgui
     public sealed partial class MainPage : Page
     {
         private static HttpClient client = new HttpClient();
-        private int? loggedInUserId = null;
+        public static int? loggedInUserId = null;
 
 
         public MainPage()
@@ -54,7 +54,7 @@ namespace UWPgui
 
         private void Login_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            ContentFrame.Content = new LoginPage();
         }
 
         private void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -68,9 +68,7 @@ namespace UWPgui
 
         private void myProfile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            loggedInUserId = 10;
             User user = GetUserProfile();
-            //Window.Current.Content = new UserPage();
             ContentFrame.Content = new UserPage(user);
 
         }
