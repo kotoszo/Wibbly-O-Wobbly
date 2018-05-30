@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using UWPgui.Models;
+using System.ComponentModel;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -24,21 +25,46 @@ namespace UWPgui
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         private static HttpClient client = new HttpClient();
-        public static int? loggedInUserId = null;
+        private static User loggedInUser;
 
+        private static int _loggedInUserId;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int loggedInUserId
+        {
+            get { return _loggedInUserId; }
+            set
+            {
+                _loggedInUserId = value;
+                OnPropertyChanged("loggedInUserId");
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public MainPage()
         {
             this.InitializeComponent();
-            
+            this.PropertyChanged += new PropertyChangedEventHandler(myClass_PropertyChanged);
         }
 
-        private void AfterUserLogin()
+        private void myClass_PropertyChanged(object sender, EventArgs e)
         {
+            loggedInUser = GetUserProfile(loggedInUserId);
 
+            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+            mp.Username.Text = "Welcome " + loggedInUser.Name;
+            mp.Username.Visibility = Visibility.Visible;
         }
 
         private void HomePageLogo_Tapped(object sender, TappedRoutedEventArgs e)
@@ -49,12 +75,13 @@ namespace UWPgui
         private void Register_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentFrame.Content = new RegistrationPage();
-
+            
         }
 
         private void Login_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ContentFrame.Content = new LoginPage();
+
         }
 
         private void NavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -68,8 +95,7 @@ namespace UWPgui
 
         private void myProfile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            User user = GetUserProfile();
-            ContentFrame.Content = new UserPage(user);
+            ContentFrame.Content = new UserPage(loggedInUser);
 
         }
 
@@ -87,9 +113,9 @@ namespace UWPgui
 
 
 
-        private User GetUserProfile()
+        private User GetUserProfile(int id)
         {
-            HttpResponseMessage response = client.GetAsync("http://localhost:62956/api/users/" + loggedInUserId).Result;
+            HttpResponseMessage response = client.GetAsync("http://localhost:62956/api/users/" + id).Result;
             string stringData = response.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<User>(stringData);

@@ -8,10 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel VerticalAlignment="Top" Height="52" Background="Black">
+        <StackPanel VerticalAlignment="Top" Height="52" Background="CadetBlue">
             <Grid Height="52">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image
@@ -20,7 +21,8 @@
                            VerticalAlignment="Center"
                             Stretch="Uniform"
                             Tapped="HomePageLogo_Tapped"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="Username" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="Register" Margin="5" Background="GhostWhite" Tapped="Register_Tapped">Register</Button>
                     <Button x:Name="Login" Margin="5" Background="GhostWhite" Tapped="Login_Tapped" Content="Login"></Button>
                 </StackPanel>

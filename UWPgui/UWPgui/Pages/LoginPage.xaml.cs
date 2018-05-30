@@ -46,7 +46,10 @@ namespace UWPgui
                 if (response.IsSuccessStatusCode)
                 {
                     var final = response.Content.ReadAsStringAsync().Result;
-                    MainPage.loggedInUserId = int.Parse(final);
+
+                    MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+                    mp.loggedInUserId = int.Parse(final);
+
                     Flyout flyout = Resources["SuccessFlyout"] as Flyout;
                     flyout.ShowAt(Page);
 
