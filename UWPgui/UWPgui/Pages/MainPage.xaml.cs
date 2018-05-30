@@ -30,7 +30,7 @@ namespace UWPgui
         private static HttpClient client = new HttpClient();
         private static User loggedInUser;
 
-        private static int _loggedInUserId;
+        private static int _loggedInUserId = -1;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int loggedInUserId
@@ -60,11 +60,36 @@ namespace UWPgui
 
         private void myClass_PropertyChanged(object sender, EventArgs e)
         {
-            loggedInUser = GetUserProfile(loggedInUserId);
+            if (loggedInUserId != -1)
+            {
+                loggedInUser = GetUserProfile(loggedInUserId);
 
-            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
-            mp.Username.Text = "Welcome " + loggedInUser.Name;
-            mp.Username.Visibility = Visibility.Visible;
+                MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+                mp.Username.Text = "Welcome " + loggedInUser.Name;
+                mp.Username.Visibility = Visibility.Visible;
+                mp.Logout.Visibility = Visibility.Visible;
+
+                mp.Login.Visibility = Visibility.Collapsed;
+                mp.Register.Visibility = Visibility.Collapsed;
+
+                mp.myProfileHeader.Visibility = Visibility.Visible;
+                mp.myProfile.Visibility = Visibility.Visible;
+                mp.myOrders.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                loggedInUser = null;
+                MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+                mp.Username.Visibility = Visibility.Collapsed;
+                mp.Logout.Visibility = Visibility.Collapsed;
+
+                mp.Login.Visibility = Visibility.Visible;
+                mp.Register.Visibility = Visibility.Visible;
+
+                mp.myProfileHeader.Visibility = Visibility.Collapsed;
+                mp.myProfile.Visibility = Visibility.Collapsed;
+                mp.myOrders.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void HomePageLogo_Tapped(object sender, TappedRoutedEventArgs e)
@@ -124,6 +149,11 @@ namespace UWPgui
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private void Logout_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            loggedInUserId = -1;
         }
     }
 }
